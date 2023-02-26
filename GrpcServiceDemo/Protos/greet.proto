@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServiceDemo";
+
+package greet;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+service EmployeeCRUD {
+	rpc SelectAll (Empty) returns (TblUsers);
+	rpc SelectByID (TblUserFilter) returns (TblUser);
+	rpc Insert (TblUser) returns (Empty);
+	rpc Update (TblUser) returns (Empty);
+	rpc Delete (TblUserFilter) returns (Empty);
+}
+
+message Empty {
+
+}
+
+message TblUser {
+	string UserId = 1;
+	string FullName = 2;
+	string Password = 3;
+	string RoleId = 4;
+}
+
+message TblUsers {
+	repeated TblUser items = 1;
+}
+
+message TblUserFilter {
+	string UserId = 1;
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
